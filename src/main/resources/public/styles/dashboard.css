@@ -1,0 +1,52 @@
+@import url("login.css");
+
+body>div {
+	padding: 10%;
+}
+
+body>div>div.pokelist {
+	height: 100%;
+	opacity: 0.6;
+	background-color: black;
+}
+
+body div.pokebattlers {
+	color: white;
+	background-color: black;
+}
+body>div.pokelist{
+	padding: 0;
+}
+#pokemon-list>.pokebattlers {
+	max-height: 400px;
+	overflow-y: scroll;
+}
+.lead.pokemonBattler{
+    cursor: pointer;
+}
+textarea.form-control {
+	resize: none;
+}
+
+#pokemon-list>.result {
+	z-index: 1;
+	padding: 15px;
+	color: white;
+	font-size: 14px;
+	max-width: 320px;
+	position: relative;
+	text-align: center;
+	margin: 0 auto 0px;
+	background: dimgray;
+	background-repeat: no-repeat !important;
+	background-image: url(/media/pokeball-partial.png) !important;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
+}
+
+#pokemon-list>.result>.pokemon-img {
+	width: 50px;
+	height: 50px;
+	margin-top: 15px;
+	background-size: 100px !important;
+}

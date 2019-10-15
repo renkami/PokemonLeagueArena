@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="./styles/dashboard.css" />
+<!--BOOTSTRAP-->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<audio class="d-none" autoplay controls>
+		<source src="/media/login.mp3" type="audio/mp3" />
+	</audio>
+	<div id="validateBattles"
+		class="d-flex  flex-column justify-content-center align-items-center">
+		<img src="/media/logo.png" width="20%" />
+		<div class="form">
+			<div class="login-form" action="/tournament" method="post">
+				<h3>¡Bienvenido al analizador de batallas pokemon!</h3>
+				<div class="form-group">
+					<label for="pokefight_result">Por favor, pega acá los
+						resultados de las batallas</label>
+					<textarea class="form-control" id="pokefight_result"
+						name="pokefight_result" rows="3"></textarea>
+				</div>
+				<button class="btn-login-account" onclick="validateBattles()">
+					Send</button>
+				<h5 class="text-warning d-none" id="error-message">Formato
+					incorrecto</h5>
+			</div>
+		</div>
+	</div>
+
+	<div id="error"
+		class="flex-column justify-content-center align-items-center d-none">
+		<img src="/media/warning.png" width="40%" />
+		<div class="form">
+			<div class="login-form">
+				<h3>WARNING</h3>
+				<div class="form-group">
+					<label for="pokefight_result" id="display-error"></label>
+				</div>
+				<button class="btn-login-account" onclick="clearValidations()">
+					Volver</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row m-0 pokelist" id="results">
+		<label for="pokefight_result" id="pokemon"></label>
+		<div id="pokemon-list"
+			class="col-12 d-flex flex-column align-items-center justify-content-start py-3">
+			<div class="row">
+				<div class="col-12">
+					<h4>
+						Fueron necesarias un mínimo de <span id="blattlesCount"></span>
+						batallas para llegar a éste resultado
+					</h4>
+					<p>Te invitamos a ver más acerca de nuestros luchadores</p>
+				</div>
+			</div>
+			<div class="row pokebattlers" id="battlers">
+				
+
+			</div>
+			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">#<span id="pokemonId"> </span> - <span id="pokemonName"> </span></h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-12"><img id="pokemonImage" src="" ></div>
+							</div>
+							<div class="row">
+								<div class="col-4"><p>Alto: </p></div>
+								<div class="col-6"><p id="pokemonHeight"> </p></div>
+							</div>
+							<div class="row">
+								<div class="col-4"><p>Peso: </p></div>
+								<div class="col-6"><p id="pokemonWeight"> </p></div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="flex-column justify-content-center align-items-center">
+					<button class="btn-login-account btn btn-success"
+						onclick="clearValidations()">Volver</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const hideClass = "d-none";
+		const flexClass = "d-flex";
+		const battleTemplate = '<div class="col-6"><div class="result d-flex justify-content-center align-items-center w-100"><div class="d-flex flex-column justify-content-center align-items-center"><button type="button" class="btn btn-link" onclick="showPokemon(\'pokename\')" data-toggle="modal" data-target="#exampleModalCenter">pokename</button></div></div></div>'
+		if (localStorage.getItem("fighters")) {
+			document.getElementById("pokefight_result").value = localStorage
+					.getItem("fighters");
+			validateBattles();
+		}
+		function showPokemon(name) {
+			//document.getElementById('pokemon').classList.remove(flexClass);
+			fetch('/pokemon/'+name).then(function(response) {
+				return response.json();
+			}).then(function(myPokemon) {
+				document.getElementById("pokemonName").innerHTML = myPokemon.name
+				document.getElementById("pokemonId").innerHTML = myPokemon.id
+				document.getElementById("pokemonHeight").innerHTML = myPokemon.height
+				document.getElementById("pokemonWeight").innerHTML = myPokemon.weight
+				document.getElementById("pokemonImage").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+myPokemon.id+".png"
+			});
+		}
+		function hidePokemon(name) {
+			//document.getElementById('pokemon).classList.add(hideClass);
+		}
+		function showElement(element) {
+			document.getElementById(element).classList.remove(hideClass);
+			document.getElementById(element).classList.add(flexClass);
+		}
+		function hideElement(element) {
+			document.getElementById(element).classList.add(hideClass);
+			document.getElementById(element).classList.remove(flexClass);
+		}
+		function showFighters(amount) {
+			document.getElementById("blattlesCount").innerHTML = amount;
+			let pokelist = "";
+			const battlers = JSON.parse(localStorage.getItem("fighters")).pokefight_result
+			for(i = 0; i< battlers.length; i++){
+				pokelist += battleTemplate.replace(/pokename/g, battlers[i])
+			}
+			document.getElementById("battlers").innerHTML = pokelist;
+			showElement("results");
+		}
+		function showError(error) {
+			let errorMessage = "";
+			if (error.timestamp) {
+				errorMessage = "Parece que algo ha salido mal, debe ser culpa del equipo rocket";
+			} else {
+				errorMessage = error.message;
+			}
+			document.getElementById("display-error").innerHTML = errorMessage;
+			showElement("error");
+		}
+		function clearValidations() {
+			localStorage.removeItem("fighters");
+			document.getElementById("pokefight_result").value = "";
+			showElement("validateBattles");
+			hideElement("error");
+			hideElement("results");
+			hidePokemon();
+		}
+		function validateBattles() {
+			document.getElementById("error-message").classList.add(hideClass);
+			const http = new XMLHttpRequest();
+			const url = "/tournament";
+			const fighters = document.getElementById("pokefight_result").value;
+			http.open("POST", url, true);
+			http.setRequestHeader("Content-Type",
+					"application/json;charset=UTF-8");
+
+			http.onreadystatechange = function() {
+				if (http.readyState == 4) {
+					const response = JSON.parse(http.responseText);
+					hideElement("validateBattles");
+					if (http.status == 200) {
+						localStorage.setItem("fighters", fighters);
+						if (!isNaN(response)) {
+							showFighters(response);
+						}
+					} else {
+						showError(response);
+					}
+				}
+			};
+			http.send(fighters);
+		}
+	</script>
+</body>
+</html>

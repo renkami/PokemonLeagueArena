@@ -1,0 +1,14 @@
+<div class="starter-template">
+    {{#pokemon}}
+        <h1>{{id}} — {{name}}</h1>
+        {{#sprites}}
+            <img src="{{frontDefault}}"  />
+        {{/sprites}}
+    {{/pokemon}}
+    <button onclick="myFunction()">Click me</button>
+</div>
+<script>
+function myFunction() {
+  console.log("Hello World");
+}
+</script>
