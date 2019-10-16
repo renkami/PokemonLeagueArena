@@ -2,6 +2,12 @@
 <html>
 <head>
 <link rel="stylesheet" href="./styles/dashboard.css" />
+
+<meta charset="utf-8">
+<link id="page_favicon"
+	href="data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAP8AAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/319hf99fYX/fX2F/319hf8AAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////////////////////99fYX/fX2F/319hf8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////////////////wAAAP8AAAD/fX2F/319hf99fYX/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//////8AAAD/AAAA/wAAAP99fYX/fX2F/wAAAP8AAAD/AAAA/319hf8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAP8AAAD/HBT//xwU//8AAAD//////319hf8AAAD/Dgim/w4Ipv8AAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAD/HBT//xwU//8cFP//HBT//wAAAP8AAAD/Dgim/w4Ipv8OCKb/Dgim/wAAAP8AAAAAAAAAAAAAAAAAAAAAAAAA/xwU//8cFP//HBT//xwU/44cFP//HBT//xwU//8cFP//Dgim/w4Ipv8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/HBT//xwU/47/////HBT/jhwU//8cFP//HBT//w4Ipv8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/xwU//8cFP//HBT/jhwU//8OCKb/Dgim/w4Ipv8OCKb/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/xwU//8OCKb/Dgim/w4Ipv8AAAD/AAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAP8AAAD/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAPw/AADwDwAA4AcAAOAHAADAAwAAwAMAAMADAADAAwAA4AcAAOAHAADwDwAA/D8AAP//AAD//wAA//8AAA=="
+	rel="icon" type="image/x-icon">
+<title>Pokemon Arena</title>
 <!--BOOTSTRAP-->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
@@ -20,12 +26,13 @@
 		<img src="/media/logo.png" width="20%" />
 		<div class="form">
 			<div class="login-form" action="/tournament" method="post">
-				<h3>¡Bienvenido al analizador de batallas pokemon!</h3>
+				<h3>Â¡Bienvenido al analizador de batallas pokemon!</h3>
 				<div class="form-group">
-					<label for="pokefight_result">Por favor, pega acá los
+					<label for="pokefight_result">Por favor, pega acÃ¡ los
 						resultados de las batallas</label>
 					<textarea class="form-control" id="pokefight_result"
-						name="pokefight_result" rows="3" placeholder='{"pokefight_result":["pokemon1", "pokemon2", "..."]}'></textarea>
+						name="pokefight_result" rows="3"
+						placeholder='{"pokefight_result":["pokemon1", "pokemon2", "..."]}'></textarea>
 				</div>
 				<button class="btn-login-account" onclick="validateBattles()">
 					Send</button>
@@ -57,23 +64,23 @@
 			<div class="row">
 				<div class="col-12">
 					<h4>
-						Fueron necesarias un mínimo de <span id="blattlesCount"></span>
-						batallas para llegar a éste resultado
+						Fueron necesarias un mÃ­nimo de <span id="blattlesCount"></span>
+						batallas para llegar a Ã©ste resultado
 					</h4>
-					<p>Te invitamos a ver más acerca de nuestros luchadores</p>
+					<p>Te invitamos a ver mÃ¡s acerca de nuestros luchadores</p>
 				</div>
 			</div>
-			<div class="row pokebattlers" id="battlers">
-				
-
-			</div>
+			<div class="row pokebattlers" id="battlers"></div>
 			<div class="modal fade" id="exampleModalCenter" tabindex="-1"
 				role="dialog" aria-labelledby="exampleModalCenterTitle"
 				aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title">#<span id="pokemonId"> </span> - <span id="pokemonName"> </span></h5>
+							<h5 class="modal-title">
+								#<span id="pokemonId"> </span> - <span id="pokemonName">
+								</span>
+							</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
@@ -81,15 +88,25 @@
 						</div>
 						<div class="modal-body">
 							<div class="row">
-								<div class="col-12"><img id="pokemonImage" src="" ></div>
+								<div class="col-12">
+									<img id="pokemonImage" src="">
+								</div>
 							</div>
 							<div class="row">
-								<div class="col-4"><p>Alto: </p></div>
-								<div class="col-6"><p id="pokemonHeight"> </p></div>
+								<div class="col-4">
+									<p>Alto:</p>
+								</div>
+								<div class="col-6">
+									<p id="pokemonHeight"></p>
+								</div>
 							</div>
 							<div class="row">
-								<div class="col-4"><p>Peso: </p></div>
-								<div class="col-6"><p id="pokemonWeight"> </p></div>
+								<div class="col-4">
+									<p>Peso:</p>
+								</div>
+								<div class="col-6">
+									<p id="pokemonWeight"></p>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -110,9 +127,9 @@
 	<script>
 		const exports = {};
 	</script>
-	<script type="text/javascript" src="https://play.pokemonshowdown.com/data/pokedex.js?7b9bbed0"></script>
+	<script type="text/javascript"
+		src="https://play.pokemonshowdown.com/data/pokedex.js?7b9bbed0"></script>
 	<script>
-		
 		const hideClass = "d-none";
 		const flexClass = "d-flex";
 		const battleTemplate = '<div class="col-6"><div class="result d-flex justify-content-center align-items-center w-100"><div class="d-flex flex-column justify-content-center align-items-center"><button type="button" class="btn btn-link" onclick="showPokemon(\'pokename\')" data-toggle="modal" data-target="#exampleModalCenter">pokename</button></div></div></div>'
@@ -123,15 +140,19 @@
 		}
 		function showPokemon(name) {
 			//document.getElementById('pokemon').classList.remove(flexClass);
-			fetch('/pokemon/'+name).then(function(response) {
-				return response.json();
-			}).then(function(myPokemon) {
-				document.getElementById("pokemonName").innerHTML = myPokemon.name
-				document.getElementById("pokemonId").innerHTML = myPokemon.id
-				document.getElementById("pokemonHeight").innerHTML = myPokemon.height
-				document.getElementById("pokemonWeight").innerHTML = myPokemon.weight
-				document.getElementById("pokemonImage").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+myPokemon.id+".png"
-			});
+			fetch('/pokemon/' + name)
+					.then(function(response) {
+						return response.json();
+					})
+					.then(
+							function(myPokemon) {
+								document.getElementById("pokemonName").innerHTML = myPokemon.name
+								document.getElementById("pokemonId").innerHTML = myPokemon.id
+								document.getElementById("pokemonHeight").innerHTML = myPokemon.height
+								document.getElementById("pokemonWeight").innerHTML = myPokemon.weight
+								document.getElementById("pokemonImage").src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"
+										+ myPokemon.id + ".png"
+							});
 		}
 		function hidePokemon(name) {
 			//document.getElementById('pokemon).classList.add(hideClass);
@@ -148,7 +169,7 @@
 			document.getElementById("blattlesCount").innerHTML = amount;
 			let pokelist = "";
 			const battlers = JSON.parse(localStorage.getItem("fighters")).pokefight_result
-			for(i = 0; i< battlers.length; i++){
+			for (i = 0; i < battlers.length; i++) {
 				pokelist += battleTemplate.replace(/pokename/g, battlers[i])
 			}
 			document.getElementById("battlers").innerHTML = pokelist;
@@ -176,7 +197,8 @@
 			document.getElementById("error-message").classList.add(hideClass);
 			const http = new XMLHttpRequest();
 			const url = "/tournament";
-			const fighters = document.getElementById("pokefight_result").value.toLowerCase();
+			const fighters = document.getElementById("pokefight_result").value
+					.toLowerCase();
 			http.open("POST", url, true);
 			http.setRequestHeader("Content-Type",
 					"application/json;charset=UTF-8");
