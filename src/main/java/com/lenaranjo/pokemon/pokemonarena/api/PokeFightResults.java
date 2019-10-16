@@ -7,6 +7,7 @@ import java.util.List;
 
 @Data
 class PokeFightResults {
-    @JsonProperty("pokefight_result")
-    private List<String> pokefightResult;
+	@JsonProperty("pokefight_result")
+	private List<String> pokefightResult;
+
 }

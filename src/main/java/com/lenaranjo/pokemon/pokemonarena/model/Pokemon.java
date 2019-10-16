@@ -9,22 +9,22 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Pokemon implements Comparable<Pokemon>{
-    private int id;
-    private String name;
-    private String url;
-    private Sprites sprites;
-    private List<Types> types;
-    private String weight;
-    private String height;
+public class Pokemon implements Comparable<Pokemon> {
+	private int id;
+	private String name;
+	private String url;
+	private Sprites sprites;
+	private List<Types> types;
+	private String weight;
+	private String height;
 
-    @Override
-    public int compareTo(Pokemon o) {
-        return this.id - o.getId();
-    }
+	@Override
+	public int compareTo(Pokemon o) {
+		return this.id - o.getId();
+	}
 
-    public final void setIdFromUrl() {
-        String[] parts = url.split("/");
-        this.id = Integer.parseInt(parts[parts.length - 1]);
-    }
+	public final void setIdFromUrl() {
+		String[] parts = url.split("/");
+		this.id = Integer.parseInt(parts[parts.length - 1]);
+	}
 }

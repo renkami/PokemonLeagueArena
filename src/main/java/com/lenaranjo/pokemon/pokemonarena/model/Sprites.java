@@ -9,12 +9,12 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Sprites {
-    private String backDefault;
-    private String backFemale;
-    private String backShiny;
-    private String backShinyFemale;
-    private String frontDefault;
-    private String frontFemale;
-    private String frontShiny;
-    private String frontShinyFemale;
+	private String backDefault;
+	private String backFemale;
+	private String backShiny;
+	private String backShinyFemale;
+	private String frontDefault;
+	private String frontFemale;
+	private String frontShiny;
+	private String frontShinyFemale;
 }
