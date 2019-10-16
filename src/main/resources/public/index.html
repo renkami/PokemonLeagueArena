@@ -25,7 +25,7 @@
 					<label for="pokefight_result">Por favor, pega acá los
 						resultados de las batallas</label>
 					<textarea class="form-control" id="pokefight_result"
-						name="pokefight_result" rows="3"></textarea>
+						name="pokefight_result" rows="3" placeholder='{"pokefight_result":["pokemon1", "pokemon2", "..."]}'></textarea>
 				</div>
 				<button class="btn-login-account" onclick="validateBattles()">
 					Send</button>
@@ -107,8 +107,12 @@
 			</div>
 		</div>
 	</div>
-
 	<script>
+		const exports = {};
+	</script>
+	<script type="text/javascript" src="https://play.pokemonshowdown.com/data/pokedex.js?7b9bbed0"></script>
+	<script>
+		
 		const hideClass = "d-none";
 		const flexClass = "d-flex";
 		const battleTemplate = '<div class="col-6"><div class="result d-flex justify-content-center align-items-center w-100"><div class="d-flex flex-column justify-content-center align-items-center"><button type="button" class="btn btn-link" onclick="showPokemon(\'pokename\')" data-toggle="modal" data-target="#exampleModalCenter">pokename</button></div></div></div>'
@@ -172,7 +176,7 @@
 			document.getElementById("error-message").classList.add(hideClass);
 			const http = new XMLHttpRequest();
 			const url = "/tournament";
-			const fighters = document.getElementById("pokefight_result").value;
+			const fighters = document.getElementById("pokefight_result").value.toLowerCase();
 			http.open("POST", url, true);
 			http.setRequestHeader("Content-Type",
 					"application/json;charset=UTF-8");

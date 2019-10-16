@@ -9,5 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Envelope {
-    private List<Pokemon> results;
+	private List<PokemonBase> results;
+
 }

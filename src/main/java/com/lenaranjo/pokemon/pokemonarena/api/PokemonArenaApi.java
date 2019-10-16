@@ -2,6 +2,7 @@ package com.lenaranjo.pokemon.pokemonarena.api;
 
 import com.lenaranjo.pokemon.pokemonarena.calculator.BattleCalculator;
 import com.lenaranjo.pokemon.pokemonarena.model.Pokemon;
+import com.lenaranjo.pokemon.pokemonarena.model.PokemonBase;
 import com.lenaranjo.pokemon.pokemonarena.pokedex.PokeApiClient;
 import com.lenaranjo.pokemon.pokemonarena.pokedex.Pokedex;
 
@@ -20,20 +21,22 @@ import java.util.stream.Collectors;
 public class PokemonArenaApi {
 
 	private final BattleCalculator battleCalculator = new BattleCalculator();
+
 	private final Pokedex pokedex = new PokeApiClient();
-	
 
 	@PostMapping("/tournament")
 	public ResponseEntity<?> getBattleCount(@RequestBody PokeFightResults battleResults, Map<String, Object> model) {
-		List<Pokemon> fighters;
+		List<PokemonBase> fighters;
 		try {
-			fighters = battleResults.getPokefightResult().stream().map(pokedex::getPokemon)
+			if (battleResults.getPokefightResult() == null || battleResults.getPokefightResult().size() == 0) {
+				throw new Exception("No hay pokemons en la lista");
+			}
+			fighters = battleResults.getPokefightResult().stream().map(pokedex::getPokemonBase)
 					.collect(Collectors.toList());
-		} catch (Exception e) {
-			return ResponseEntity.badRequest().body(new ResponseError(400, "No encontramos algún pokemon en la lista"));
-		}
-		
-		try {
+			if (fighters.stream().filter(pokemon -> pokemon == null).count() > 0) {
+				throw new Exception("No se encontró el nombre de algún pokemon");
+			}
+
 			return ResponseEntity.ok().body(battleCalculator.calculateMinimumBattles(fighters));
 		} catch (Exception e) {
 			model.put("error", e);
@@ -47,11 +50,11 @@ public class PokemonArenaApi {
 		model.put("pokemon", pokedex.getPokemon(name));
 		return pokedex.getPokemon(name);
 	}
-	
 
-	/*@GetMapping("/pokemon/{name}")
-	public ModelAndView getPokemonInfo(@PathVariable("name") String name, Map<String, Object> model) {
-		model.put("pokemon", pokedex.getPokemon(name));
-		return new ModelAndView("pokemon", model);
-	}*/
+	/*
+	 * @GetMapping("/pokemon/{name}") public ModelAndView
+	 * getPokemonInfo(@PathVariable("name") String name, Map<String, Object> model)
+	 * { model.put("pokemon", pokedex.getPokemon(name)); return new
+	 * ModelAndView("pokemon", model); }
+	 */
 }
